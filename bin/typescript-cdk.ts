@@ -1,10 +1,11 @@
 #!/usr/bin/env node
-import 'source-map-support/register';
 import * as cdk from '@aws-cdk/core';
+import { Tags } from '@aws-cdk/core';
+import 'source-map-support/register';
 import { TypescriptCdkStack } from '../lib/typescript-cdk-stack';
 
 const app = new cdk.App();
-new TypescriptCdkStack(app, 'TypescriptCdkStack', {
+const stack = new TypescriptCdkStack(app, 'TypescriptCdkStack', {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
@@ -19,3 +20,5 @@ new TypescriptCdkStack(app, 'TypescriptCdkStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+Tags.of(stack).add('App', 'DocumentManagement');
+Tags.of(stack).add('Environment', 'Development');
